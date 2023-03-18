@@ -35,6 +35,7 @@ applications:
             # - aws s3 cp amplify.yml s3://main-sandbox/public/
             # - yarn amplify:clean:current-backend
             - npx pnpm run web:build
+            - tree -I 'test*|bin|lib|node_modules'
         postBuild:
           commands:
             - echo END OF APP BUILD
