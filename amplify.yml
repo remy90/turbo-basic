@@ -35,6 +35,7 @@ applications:
             # - aws s3 cp amplify.yml s3://main-sandbox/public/
             # - yarn amplify:clean:current-backend
             - npx pnpm run web:build
+            - cd apps/web
             - tree -a -I 'test*|bin|lib|node_modules|.git'
         postBuild:
           commands:
