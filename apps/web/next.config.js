@@ -2,4 +2,7 @@ module.exports = {
   reactStrictMode: true,
   transpilePackages: ["ui"],
   distDir: './.next',
+  output: "standalone",
+  basePath: "",
+  cleanDistDir: true,
 };
