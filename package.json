@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "[-- Build --]": "",
-    "docs:build": "turbo run build --filter=@kitchen-sink/docs",
-    "web:build": "turbo run build --filter=@kitchen-sink/web",
+    "docs:build": "turbo run build --filter=docs",
+    "web:build": "turbo run build --filter=web",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
