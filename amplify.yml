@@ -27,7 +27,7 @@ applications:
           commands:
             - echo FRONTEND APP BUILD
             # Cleans all pkg and app folders of nm, turbo, dist and .next (You don't need this, this is something I used)
-            - ./scripts/clean.sh
+            # - ./scripts/clean.sh
             - nvm install 16.13 # NodeJS 16.13+ is the latest version that Amplify Hosting supports
             - nvm use 16
             - node -v
@@ -42,7 +42,7 @@ applications:
         # Base directory should just be next. If you set it to apps/someapp when the build finishes it would then be apps/someapp/apps/someapp/.next and that is wrong.
         baseDirectory: .next
         files:
-          - "**/*"
+          - '**/*'
       cache:
         paths:
           - node_modules/**/*
