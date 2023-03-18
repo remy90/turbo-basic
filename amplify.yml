@@ -22,7 +22,7 @@ applications:
             # - nvm use 16
             # - node -v
             # This you don't need per say, it depends on how your repo is set up. At the time I needed this config and this was the only way I could get it to work.
-            # - echo -e "@kitchen-sink:registry=https://registry.npmjs.org/\nstrict-peer-dependencies=false\nauto-install-peers=true\nshamefully-hoist=true" > .npmrc
+            - echo -e "strict-peer-dependencies=false\nauto-install-peers=true\nshamefully-hoist=true" > .npmrc
         build:
           commands:
             - echo FRONTEND APP BUILD
