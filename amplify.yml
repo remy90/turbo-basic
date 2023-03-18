@@ -1,0 +1,48 @@
+version: 1
+applications:
+  - appRoot: apps/web
+    env:
+    variables:
+      # AMPLIFY_DIFF_DEPLOY: true
+    backend:
+      phases:
+        build:
+          commands:
+            - echo BACKEND BUILD
+            - echo FINISHED BACKEND BUILD
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - echo FRONTEND HELP PREBUILD
+            # Step out to the root of the repo and run pnpm install, also set the version
+            - cd ../../
+            # This can probably be removed at this point, but I'm not sure.
+            - nvm install 16.13 # NodeJS 16.13+ is the latest version that Amplify Hosting supports
+            - nvm use 16
+            - node -v
+            # This you don't need per say, it depends on how your repo is set up. At the time I needed this config and this was the only way I could get it to work.
+            - echo -e "@kitchen-sink:registry=https://registry.npmjs.org/\nstrict-peer-dependencies=false\nauto-install-peers=true\nshamefully-hoist=true" > .npmrc
+        build:
+          commands:
+            - echo FRONTEND APP BUILD
+            # Cleans all pkg and app folders of nm, turbo, dist and .next (You don't need this, this is something I used)
+            - ./scripts/clean.sh
+            - nvm install 16.13 # NodeJS 16.13+ is the latest version that Amplify Hosting supports
+            - nvm use 16
+            - node -v
+            - npx pnpm install
+            # - aws s3 cp amplify.yml s3://main-sandbox/public/
+            # - yarn amplify:clean:current-backend
+            - npx pnpm run web:build
+        postBuild:
+          commands:
+            - echo END OF APP BUILD
+      artifacts:
+        # Base directory should just be next. If you set it to apps/someapp when the build finishes it would then be apps/someapp/apps/someapp/.next and that is wrong.
+        baseDirectory: .next
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
